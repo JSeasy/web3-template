@@ -16,5 +16,6 @@
     "skipLibCheck": true
   },
   "include": ["src/**/*", "src/**/*.vue"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "typeRoots":["src/views/**/types/*.ts"]
 }

@@ -22,6 +22,16 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'erc20',
+      name: 'Erc20',
+      component: () => import('@/views/erc20/index.vue'),
+      meta: {
+        locale: 'menu.dashboard.workplace',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 

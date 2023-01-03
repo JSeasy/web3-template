@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <Container class="dashboard">
     <div class="left-side">
       <div class="panel">
         <Banner />
@@ -38,10 +38,11 @@
         </a-grid-item>
       </a-grid>
     </div>
-  </div>
+  </Container>
 </template>
 
 <script lang="ts" setup>
+  import Container from '@/components/container/index.vue';
   import Banner from './components/banner.vue';
   import DataPanel from './components/data-panel.vue';
   import ContentChart from './components/content-chart.vue';
