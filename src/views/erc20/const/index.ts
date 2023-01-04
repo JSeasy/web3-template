@@ -23,11 +23,15 @@ export const columns = [
     title: '货币精度',
     dataIndex: 'precision',
   },
-  {
-    title: '操作',
-    dataIndex: 'action',
-    render() {
-      return h(Button, {}, { default: () => '删除' });
-    },
-  },
+  // {
+  //   title: '操作',
+  //   dataIndex: 'action',
+  //   render() {
+  //     return h(() => [
+  //       h(Button, {}, () => '删除'),
+  //       h(Button, {}, () => '查看'),
+  //       h(Button, {}, () => '转账'),
+  //     ]);
+  //   },
+  // },
 ];

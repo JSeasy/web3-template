@@ -15,7 +15,7 @@ const DASHBOARD: AppRouteRecordRaw = {
     {
       path: 'workplace',
       name: 'Workplace',
-      component: () => import('@/views/dashboard/workplace/index.vue'),
+      component: () => import('@/views/test/index.vue'),
       meta: {
         locale: 'menu.dashboard.workplace',
         requiresAuth: true,
@@ -27,7 +27,7 @@ const DASHBOARD: AppRouteRecordRaw = {
       name: 'Erc20',
       component: () => import('@/views/erc20/index.vue'),
       meta: {
-        locale: 'menu.dashboard.workplace',
+        locale: 'menu.dashboard.ERC20',
         requiresAuth: true,
         roles: ['*'],
       },

@@ -107,9 +107,9 @@ export const deployERC20Contract = async ({
   return contract;
 };
 
-window.addEventListener('unhandledrejection', (err) => {
-  console.log(err);
-});
+// window.addEventListener('unhandledrejection', (err) => {
+//   console.log(err);
+// });
 
 export const emitMethod = async (method: string, params?: any) => {
   const provider = await getProvider();

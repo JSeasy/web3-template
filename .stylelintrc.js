@@ -8,7 +8,7 @@ module.exports = {
   plugins: ['stylelint-order'],
   rules: {
     'at-rule-no-unknown': [
-      true,
+      false,
       {
         ignoreAtRules: ['plugin'],
       },
