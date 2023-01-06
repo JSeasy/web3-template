@@ -77,8 +77,8 @@
   import { useStorage } from '@vueuse/core';
   import { useUserStore } from '@/store';
   import useLoading from '@/hooks/loading';
-
   import { registerAction } from 'echarts';
+  import { setToken } from '@/utils/auth';
   import { IUser, regist, login } from '../api';
 
   const router = useRouter();
@@ -116,7 +116,8 @@
     if (loading.value) return;
     if (!errors) {
       setLoading(true);
-      login(values as IUser).then(() => {
+      login(values as IUser).then(({ data }) => {
+        setToken(data.access_token);
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
         setLoading(false);
         router.push({

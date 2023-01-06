@@ -8,7 +8,7 @@ export interface IUser {
 export const login = (data: IUser) => {
   return axios({
     method: 'POST',
-    url: '/users/login',
+    url: '/auth/login',
     data,
   });
 };
