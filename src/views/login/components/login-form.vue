@@ -46,7 +46,7 @@
           <a-checkbox
             checked="rememberPassword"
             :model-value="loginConfig.rememberPassword"
-            @change="(setRememberPassword as any)"
+            @change="setRememberPassword as any"
           >
             {{ $t('login.form.rememberPassword') }}
           </a-checkbox>
@@ -55,7 +55,12 @@
         <a-button type="primary" html-type="submit" long :loading="loading">
           {{ $t('login.form.login') }}
         </a-button>
-        <a-button type="text" long class="login-form-register-btn">
+        <a-button
+          type="text"
+          long
+          class="login-form-register-btn"
+          @click="userRegist"
+        >
           {{ $t('login.form.register') }}
         </a-button>
       </a-space>
@@ -66,13 +71,15 @@
 <script lang="ts" setup>
   import { ref, reactive } from 'vue';
   import { useRouter } from 'vue-router';
-  import { Message } from '@arco-design/web-vue';
+  import { FormInstance, Message } from '@arco-design/web-vue';
   import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
   import { useI18n } from 'vue-i18n';
   import { useStorage } from '@vueuse/core';
   import { useUserStore } from '@/store';
   import useLoading from '@/hooks/loading';
-  import type { LoginData } from '@/api/user';
+
+  import { registerAction } from 'echarts';
+  import { IUser, regist, login } from '../api';
 
   const router = useRouter();
   const { t } = useI18n();
@@ -89,7 +96,16 @@
     username: loginConfig.value.username,
     password: loginConfig.value.password,
   });
-
+  const loginForm = ref<FormInstance>();
+  const userRegist = () => {
+    loginForm.value?.validate().then((err) => {
+      if (!err) {
+        regist(userInfo).then((res) => {
+          Message.success('注册成功');
+        });
+      }
+    });
+  };
   const handleSubmit = async ({
     errors,
     values,
@@ -100,27 +116,37 @@
     if (loading.value) return;
     if (!errors) {
       setLoading(true);
-      try {
-        await userStore.login(values as LoginData);
+      login(values as IUser).then(() => {
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
+        setLoading(false);
         router.push({
           name: (redirect as string) || 'Workplace',
           query: {
             ...othersQuery,
           },
         });
-        Message.success(t('login.form.login.success'));
-        const { rememberPassword } = loginConfig.value;
-        const { username, password } = values;
-        // 实际生产环境需要进行加密存储。
-        // The actual production environment requires encrypted storage.
-        loginConfig.value.username = rememberPassword ? username : '';
-        loginConfig.value.password = rememberPassword ? password : '';
-      } catch (err) {
-        errorMessage.value = (err as Error).message;
-      } finally {
-        setLoading(false);
-      }
+      });
+      // try {
+      //   await userStore.login(values as LoginData);
+      //   const { redirect, ...othersQuery } = router.currentRoute.value.query;
+      //   router.push({
+      //     name: (redirect as string) || 'Workplace',
+      //     query: {
+      //       ...othersQuery,
+      //     },
+      //   });
+      //   Message.success(t('login.form.login.success'));
+      //   const { rememberPassword } = loginConfig.value;
+      //   const { username, password } = values;
+      //   // 实际生产环境需要进行加密存储。
+      //   // The actual production environment requires encrypted storage.
+      //   loginConfig.value.username = rememberPassword ? username : '';
+      //   loginConfig.value.password = rememberPassword ? password : '';
+      // } catch (err) {
+      //   errorMessage.value = (err as Error).message;
+      // } finally {
+      //   setLoading(false);
+      // }
     }
   };
   const setRememberPassword = (value: boolean) => {

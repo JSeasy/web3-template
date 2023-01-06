@@ -1,6 +1,7 @@
 export default {
   'menu.dashboard.workplace': 'Workplace',
   'menu.dashboard.ERC20': 'ERC20',
+  'menu.dashboard.users': 'Users',
   'workplace.welcome': 'Welcome!',
   'workplace.balance': 'Balance (CNY)',
   'workplace.order.pending': 'Pending',

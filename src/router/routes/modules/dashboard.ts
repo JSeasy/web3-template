@@ -32,6 +32,16 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'users',
+      name: 'Users',
+      component: () => import('@/views/users/index.vue'),
+      meta: {
+        locale: 'menu.dashboard.users',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 
