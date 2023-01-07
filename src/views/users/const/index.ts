@@ -1,14 +1,10 @@
-import { h } from 'vue';
+import { h, Ref } from 'vue';
 import { Button } from '@arco-design/web-vue/es';
 
-export const columns = [
+export const createColumns = ({ visible, form }: ICreateColumnsOptions) => [
   {
     title: '用户名',
     dataIndex: 'username',
-  },
-  {
-    title: '密码',
-    dataIndex: 'password',
   },
 
   {
@@ -18,5 +14,22 @@ export const columns = [
   {
     title: '更新时间',
     dataIndex: 'updateDate',
+  },
+  {
+    title: '操作',
+    dataIndex: 'action',
+    render() {
+      return h(
+        Button,
+        {
+          onClick: () => {
+            visible.value = true;
+          },
+        },
+        {
+          default: () => '关联账户',
+        }
+      );
+    },
   },
 ];

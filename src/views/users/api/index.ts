@@ -6,3 +6,11 @@ export const getUserList = () => {
     url: '/users',
   });
 };
+
+export const bindAccount = (data: IAccount) => {
+  return axios({
+    method: 'POST',
+    url: '/account/bind',
+    data,
+  });
+};
